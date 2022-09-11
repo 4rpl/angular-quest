@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <meta charset="utf-8">
+        <style>
+            ol {
+                list-style: none;
+                counter-reset: li;
+            }
+        
+            li:before {
+                counter-increment: li;
+                content: counters(li, ".") ". ";
+            }
+            input[type=checkbox] {
+                margin-right: .5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col" id="root">
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            const q = [
+                'JS - ??',
+                'TS',
+                [
+                    'Partial, Pick, Record, keyof, infer',
+                    'unknown vs any',
+                    'strict',
+                ],
+                'Observable',
+                [
+                    'merge vs forkJoin vs combineLatest',
+                    'shareReplay',
+                    'debounce vs throttle',
+                ],
+                'Общие понятия',
+                [
+                    'Процесс отладки',
+                ],
+                'Angular',
+                [
+                    'Директивы атрибутивные и структурные',
+                    'Пайпы чистые и нечистые',
+                    'Инкапсуляция стилей',
+                    [
+                        'Обход инкапсуляции (ng-deep)',
+                    ],
+                    'Оптимизация',
+                    [
+                        'trackBy',
+                        'Pipe',
+                        'changeDetection',
+                        'Perfomance',
+                    ],
+                ],
+                'Redux',
+                [
+                    'Чистые функции',
+                    'Эффекты',
+                    'Ограничения на типы в состоянии (сериализуемость)',
+                    'Мутабельность',
+                ],
+                'git - ??',
+                'Практики',
+                [
+                    'DTO',
+                    'Бренды/тэги',
+                    'float: что делать с ошибками округления?',
+                ],
+                'CSS',
+                [
+                    'CSS vs SCSS (+разница переменных)',
+                ],
+            ];
+        
+            (function init(root, list) {
+                const ol = document.createElement('ol');
+                for (let index = 0; index < list.length; index++) {
+                    const li = document.createElement('li');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('form-check-input');
+                    checkbox.id = list[index];
+                    checkbox.indeterminate = true;
+                    li.appendChild(checkbox);
+                    const label = document.createElement('label');
+                    label.textContent = list[index];
+                    label.htmlFor = list[index];
+                    li.appendChild(label);
+                    ol.appendChild(li);
+                    if (typeof list[index + 1] === 'object') {
+                        index++;
+                        init(li, list[index]);
+                    }
+                }
+                root.appendChild(ol);
+            })(document.querySelector('#root'), q);
+        </script>
+    </body>
+</html>
