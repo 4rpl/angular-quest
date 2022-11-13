@@ -1,7 +1,9 @@
 type UnaryFunction<T> = (t: T) => T;
 
 const addTen = (i: number) => i + 10;
-const multiplyByTwo = (i: number) => i * 1;
+const multiplyByTwo = (i: number) => i * 2;
+
+// TODO: function pipe
 
 const result = pipe(
     addTen, // 11
